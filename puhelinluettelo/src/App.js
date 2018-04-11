@@ -16,20 +16,23 @@ class App extends React.Component {
     event.preventDefault()
     
     const personObject = {
-      name: this.state.newName
+      name: this.state.newName,
+      number: this.state.newNumber
     }
     const names = this.state.persons.map((x)=>x.name)
     if (!names.includes(personObject.name)) {
       const persons = this.state.persons.concat(personObject)
       this.setState({
         persons: persons,
-        newName: ''
+        newName: '',
+        newNumber: ''
       })
     } else {
       alert('Saman niminen henkilö on jo listalla')
       this.setState({
         persons: this.state.persons,
-        newName: ''
+        newName: '',
+        newNumber: ''
       })
     }
     
@@ -39,6 +42,12 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({ newName: event.target.value })
   }
+
+  handleNumberChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newNumber: event.target.value })
+  }
+
   render() {
     return (
       <div>
@@ -48,21 +57,23 @@ class App extends React.Component {
             nimi: <input value={this.state.newName} onChange={this.handleNameChange}/>
           </div>
           <div>
-            numero: <input value={this.state.newName} onChange={this.handleNameChange}/>
+            numero: <input value={this.state.newNumber} onChange={this.handleNumberChange}/>
           </div>
           <div>
             <button type="submit">lisää</button>
           </div>
         </form>
         <h2>Numerot</h2>
-        {this.state.persons.map((person)=><Person key={person.name} name={person.name}/>)}
+        <table>
+          <tbody>
+            {this.state.persons.map((person)=><Person key={person.name} name={person.name}/>)}
+          </tbody>
+        </table>
       </div>
     )
   }
 }
-const Person = ({name}) => {
-  return (<div>
-    {name}
-  </div>)
+const Person = ({name,number}) => {
+  return (<tr><td>{name}</td><td>{number}</td></tr>)
 }
 export default App
