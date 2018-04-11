@@ -5,9 +5,10 @@ class App extends React.Component {
     super(props)
     this.state = {
       persons: [
-        { name: 'Arto Hellas' }
+        { name: 'Arto Hellas', number:'040-123456' }
       ],
-      newName: ''
+      newName: '',
+      newNumber:''
     }
   }
 
@@ -45,6 +46,9 @@ class App extends React.Component {
         <form onSubmit={this.addPerson}>
           <div>
             nimi: <input value={this.state.newName} onChange={this.handleNameChange}/>
+          </div>
+          <div>
+            numero: <input value={this.state.newName} onChange={this.handleNameChange}/>
           </div>
           <div>
             <button type="submit">lisää</button>
