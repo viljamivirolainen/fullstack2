@@ -66,14 +66,14 @@ class App extends React.Component {
         <h2>Numerot</h2>
         <table>
           <tbody>
-            {this.state.persons.map((person)=><Person key={person.name} name={person.name}/>)}
+            {this.state.persons.map((person)=><Person key={person.name} person={person}/>)}
           </tbody>
         </table>
       </div>
     )
   }
 }
-const Person = ({name,number}) => {
-  return (<tr><td>{name}</td><td>{number}</td></tr>)
+const Person = ({person}) => {
+  return (<tr><td>{person.name}</td><td>{person.number}</td></tr>)
 }
 export default App
