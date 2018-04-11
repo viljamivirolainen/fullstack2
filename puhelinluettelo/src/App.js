@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 class App extends React.Component {
@@ -71,21 +72,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>Puhelinluettelo</h1>
-        <div>
-            rajaa näytettäviä: <input value={this.state.filter} onChange={this.handleFilterChange}/>
-        </div>
+        <Filter filter = {this.state.filter} handler = {this.handleFilterChange}/>
         <h2>Lisää uusi:</h2>
-        <form onSubmit={this.addPerson}>
-          <div>
-            nimi: <input value={this.state.newName} onChange={this.handleNameChange}/>
-          </div>
-          <div>
-            numero: <input value={this.state.newNumber} onChange={this.handleNumberChange}/>
-          </div>
-          <div>
-            <button type="submit">lisää</button>
-          </div>
-        </form>
+        <AdderForm submitHandler={this.addPerson} values={[this.state.newName,this.state.newNumber]} changeHandlers={[this.handleNameChange, this.handleNumberChange]} />
         <h2>Numerot</h2>
         <table>
           <tbody>
@@ -96,7 +85,31 @@ class App extends React.Component {
     )
   }
 }
+
+const AdderForm = ({submitHandler, values, changeHandlers}) => {
+  return(<form onSubmit={submitHandler}>
+    <div>
+      nimi: <input value={values[0]} onChange={changeHandlers[0]} />
+    </div>
+    <div>
+      numero: <input value={values[1]} onChange={changeHandlers[1]} />
+    </div>
+    <div>
+      <button type="submit">lisää</button>
+    </div>
+  </form>)
+}
+
+const Filter = ({filter, handler}) => {
+  return(<div>
+    rajaa näytettäviä: <input value={filter} onChange={handler}/>
+  </div>)
+}
+
 const Person = ({person}) => {
   return (<tr><td>{person.name}</td><td>{person.number}</td></tr>)
 }
+
+ 
+
 export default App
