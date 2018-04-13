@@ -51,6 +51,7 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({ filter: event.target.value })
   }
+  
   componentDidMount() {
     axios
       .get('http://localhost:3001/persons')
