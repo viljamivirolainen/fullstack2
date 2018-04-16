@@ -20,6 +20,10 @@ class App extends React.Component {
     }
     const names = this.state.persons.map((x)=>x.name)
     if (!names.includes(personObject.name)) {
+      axios.post('http://localhost:3001/persons', personObject)
+        .then(response => {
+        console.log(response) //tämä valmiiksi, pitäisi saada
+      }) //siis tallennettua henkilöiden yhteystiedot serverille
       const persons = this.state.persons.concat(personObject)
       this.setState({
         persons: persons,
