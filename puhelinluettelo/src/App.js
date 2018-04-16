@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios'
+import personService from './services/persons'
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -20,10 +20,10 @@ class App extends React.Component {
     }
     const names = this.state.persons.map((x)=>x.name)
     if (!names.includes(personObject.name)) {
-      axios.post('http://localhost:3001/persons', personObject)
+      personService.create(personObject)
         .then(response => {
-        console.log(response) //tämä valmiiksi, pitäisi saada
-      }) //siis tallennettua henkilöiden yhteystiedot serverille
+        console.log(response)
+      }) 
       const persons = this.state.persons.concat(personObject)
       this.setState({
         persons: persons,
@@ -57,10 +57,9 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        this.setState({ persons: response.data })
+    personService.getAll()
+      .then(persons => {
+        this.setState({persons})
       })
   }
   render() {
