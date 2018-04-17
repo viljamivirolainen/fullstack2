@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.success {
+  color: black;
+  background: green;
+  font-size: 20px;
+  border-style: solid;
+  border-color:black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
